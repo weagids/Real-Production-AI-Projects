@@ -1,10 +1,10 @@
-## Enterprise GenAI Knowledge Assistant (AWS)
+# Enterprise GenAI Knowledge Assistant (AWS)
 
 ## Overview
 This project implements a secure, enterprise-grade Generative AI knowledge assistant using AWS services.  
 It leverages Amazon Bedrock and Retrieval-Augmented Generation (RAG) to provide accurate, auditable, and context-aware responses from proprietary knowledge sources.
 
-## Business Problem
+### Business Problem
 Enterprises struggle to safely expose internal knowledge (documents, policies, manuals) to AI systems without:
 - Data leakage
 - Hallucinations
