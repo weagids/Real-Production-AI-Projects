@@ -1,4 +1,4 @@
-# Enterprise GenAI Knowledge Assistant (AWS)
+## Enterprise GenAI Knowledge Assistant (AWS)
 
 ## Overview
 This project implements a secure, enterprise-grade Generative AI knowledge assistant using AWS services.  
