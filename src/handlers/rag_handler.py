@@ -29,7 +29,10 @@ def lambda_handler(event, context):
         if not question:
             return _response(400, "Question is required")
 
-        logger.info(f"Received question: {question}")
+        logger.info(json.dumps({
+            "event": "question_received",
+            "question": question
+        }))
 
         # 1️⃣ Embed query
         query_embedding = embedder.embed_chunks([
@@ -47,6 +50,11 @@ def lambda_handler(event, context):
             for r in search_results
         )
 
+        logger.info(json.dumps({
+            "event": "answer_generated",
+            "sources": [r['metadata'].get("source") for r in search_results]
+        }))
+
         # 3️⃣ Build prompt
         prompts = build_rag_prompt(context_text, question)
 
@@ -61,6 +69,7 @@ def lambda_handler(event, context):
     except Exception as e:
         logger.exception("RAG processing failed")
         return _response(500, "Internal server error")
+
 
 def _response(status_code, message):
     return {
