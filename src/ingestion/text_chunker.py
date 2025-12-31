@@ -19,13 +19,14 @@ class TextChunker:
             chunk_words = words[start:end]
             chunk_text = " ".join(chunk_words)
 
-            chunks.append({
-                "id": str(uuid.uuid4()),
-                "text": chunk_text,
-                "metadata": {
-                    "source": source,
-                    "start_word": start,
-                    "end_word": end
+           chunks.append({
+        "id": str(uuid.uuid4()),
+        "text": chunk_text,
+        "metadata": {
+            "source": source,
+            "tenant_id": tenant_id,
+            "start_word": start,
+            "end_word": end
                 }
             })
 
