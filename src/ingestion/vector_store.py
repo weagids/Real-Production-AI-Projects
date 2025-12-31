@@ -58,3 +58,33 @@ class OpenSearchVectorStore:
             )
 
             logger.info(f"Stored chunk {chunk['id']} → {response.status_code}")
+                def search(self, query_embedding: List[float], top_k: int = 5) -> List[Dict]:
+        search_body = {
+            "size": top_k,
+            "query": {
+                "knn": {
+                    "embedding": {
+                        "vector": query_embedding,
+                        "k": top_k
+                    }
+                }
+            }
+        }
+
+        response = requests.post(
+            f"{self.endpoint}/{self.index_name}/_search",
+            headers=self.headers,
+            json=search_body
+        )
+
+        hits = response.json()["hits"]["hits"]
+
+        return [
+            {
+                "score": hit["_score"],
+                "text": hit["_source"]["text"],
+                "metadata": hit["_source"]["metadata"]
+            }
+            for hit in hits
+        ]
+
